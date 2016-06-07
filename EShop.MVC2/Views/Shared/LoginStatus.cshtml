@@ -1,0 +1,16 @@
+﻿@{ 
+    var identity = this.ViewContext.HttpContext.User.Identity;
+}
+
+<div style="overflow:hidden;" class = "categories_list">
+    @if(Request.IsAuthenticated && identity.IsAuthenticated)
+    {
+        <div style="float:right"> <b>@identity.Name</b> 
+        @Html.ActionLink("Выход", "Logoff", "Account" , new { controller = "Account" }, new { style = "border-bottom: 1px dashed #000080; text-decoration: none;" })</div>
+    }
+    else
+    {
+        <div style="float:right"> @Html.ActionLink("Вход", "Login", new { controller = "Account" }, new { style = "border-bottom: 1px dashed #000080; text-decoration: none;" })
+        или @Html.ActionLink("Регистрация", "Users", new { controller = "Account" }, new { @class = "categories_list", style = "border-bottom: 1px dashed #000080; text-decoration: none;" })</div>
+    }
+</div>

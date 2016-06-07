@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "Логин";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model EShop.MVC2.Models.LoginView
+
+@*@section Header {
+    <div class="view">
+        @foreach (string str in new[] { "Home", "List", "Edit" })
+        {
+            @Html.ActionLink(str, str, null, new { style = "margin: 5px" })
+        }
+    </div>
+}*@
+
+@*@section contentLeftPanel {<b>Панель для страницы логина</b>}*@ 
+
+@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
+{
+    <table style="width:820px" align="center" border="0" >
+        <tr>
+            <td>
+                <table style="width:250px" align="center" class="categories_list">
+                    <tr>
+                        <td colspan="2"><b>Введите свои данные</b></td>
+                    </tr>
+                    <tr>
+                        <td width="70px">Логин</td>
+                        <td>
+                            @Html.TextBoxFor(u => u.Login, new { style = "width:100%"})
+                            @Html.ValidationMessageFor(u => u.Login)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="70px">Пароль</td>
+                        <td>
+                            @Html.PasswordFor(u => u.Password, new { style = "width:100%" })
+                            @Html.ValidationMessageFor(u => u.Password)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align:right">
+                            <input type="reset" value="Сброс" /> &nbsp;<input type="submit" value="Вход" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" >
+                            @Html.ValidationSummary(true)
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+}

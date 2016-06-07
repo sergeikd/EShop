@@ -1,0 +1,222 @@
+﻿@using EShop.Entity;
+@using System.Globalization;
+@using EShop.MVC2.Models;
+@{
+    ViewBag.Title = "Model";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*данные Model приходят из метода контроллера /Controllers/HomeController.cs > Model(int? id)*@
+@model EShop.Entity.Model
+@{
+    var comments = ViewBag.Comments as List<Comments>;
+    var identity = this.ViewContext.HttpContext.User.Identity;
+}
+
+@*вызов частичного представления:
+    метод BreadCrumb(int? id) в контроллере /Controllers/HomeController.cs,
+    генерирование HTML разметки происходит в Views/Home/BreadCrumb.cshtml*@
+@Html.Action("BreadCrumb", new { id = ViewBag.Selected }) 
+
+@*Тут уже выводятся данные о выбранном товаре*@
+
+@if (Request.IsAuthenticated && identity.IsAuthenticated && Roles.GetRolesForUser(identity.Name).Contains("Admins")) 
+{
+    var error = ViewBag.Error as List<string>;
+    using (Html.BeginForm("ModelEdit", "Home", new { enctype = "multipart/form-data", modelId = Model.Id }, FormMethod.Post))
+    {
+        <table border="0" width="800" border-collapse collapse;" class="categories_list">
+            @if (error != null && error.Count > 0)
+            {
+                foreach (var item in error)
+                {
+                    <tr>
+                        <td colspan="2" style="color:red">
+                            @item
+                        </td>
+                    </tr>
+                }
+            }
+            <tr>
+                <td colspan="2">Текущая категория: @Model.Category.Name (@Model.CategoryId)</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align:center">@{Html.RenderAction("WholeTree", "Home");}</td>
+            </tr>
+            <tr>
+                <td colspan="2">Id модели: @Model.Id.ToString()</td>
+            </tr>
+            @*<tr>
+                <td colspan="2" style="text-align:center">@{Html.RenderAction("UsedId", "Home");}</td>
+            </tr>*@
+            <tr>
+                <td colspan="2">
+                    <a>@Html.TextArea("Title", Model.Title, 2, 100, new { maxlength = "512", @class = "categories_list", width = "100%" })</a>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="padding:20px">
+                    @Html.ImgUrl(Model.ImageId)<br /><br />
+                    <input type="button" value="Изменить изображение" onclick="window.location.href='@Url.Action("Upload", "Admin", new { id = Model.ImageId, id2 = Model.Id, id3 = ViewBag.Selected })';" />
+                    @*<input type="button" value="Изменить категорию" onclick="window.location.href='@Url.Action("CnahgeCategory", "Admin", new { id = Model.Id, id2 = Model.CategoryId, id3 = ViewBag.Selected })';" />*@
+                </td>
+            </tr>
+            <tr>
+                <td width="80">
+                    <a>Описание:</a>
+                </td>
+                <td>
+                    <a>@Html.TextArea("Description", Model.Description, 2, 100, new { maxlength = "2048", @class = "categories_list", width = "100%" })</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a>Цена:</a>
+                </td>
+                <td>
+                    <a>@Html.TextArea("Price", Model.Price.ToString(), 1, 10, new { maxlength = "10", @class = "categories_list", width = "100%" })</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a>Гарантия:</a>
+                </td>
+                <td>
+                    <a>@Html.TextArea("Warranty", Model.Warranty.ToString(), 1, 2, new { maxlength = "2", @class = "categories_list", width = "100%" })</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a>Наличие:</a>
+                </td>
+                <td>
+                    <a>@Html.DropDownListFor(model => model.AvailabilityId, (IEnumerable<SelectListItem>)ViewBag.AvailabilityListModel, new { @class = "categories_list" })</a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a>Доставка:</a>
+                </td>
+                <td>
+                    <a>@Html.DropDownListFor(model => model.DeliveryId, (IEnumerable<SelectListItem>)ViewBag.DeliveryListModel, new { @class = "categories_list" })</a>
+                </td>
+            </tr>
+            <tr>
+                <td colspan ="2" style="text-align:right; ">
+                    <input type="submit" value="Cохранить" />
+                    <input type="submit" formaction="~/Home/ModelDelete/@Model.Id" value="Удалить" />
+                </td>
+            </tr>
+        </table>
+    }
+
+}
+else
+{
+    <table border="0" width="800" border-collapse collapse;" class="categories_list">
+        <tr>
+            <td colspan="2">
+                @Model.Title
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="padding:20px">
+                @Html.ImgUrl(Model.ImageId)
+            </td>
+        </tr>
+        <tr>
+            <td width="80">
+                <a>Описание:</a>
+            </td>
+            <td>
+                <a>@Model.Description</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a>Цена:</a>
+            </td>
+            <td>
+                <a> @Model.Price.ToString().Remove(Model.Price.ToString().Length - 2, 2)</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a>Гарантия:</a>
+            </td>
+            <td>
+                <a>@Model.Warranty</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a>Наличие:</a>
+            </td>
+            <td>
+                <a>@Model.Availability.AvailabilityType</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a>Доставка:</a>
+            </td>
+            <td>
+                <a>@Model.Delivery.DeliveryType</a>
+            </td>
+        </tr>
+    </table>
+}
+
+@{
+    if ( comments != null && comments.Count > 0)
+    {
+        <hr />
+        <table border="0" width="800" border-collapse collapse;" class="categories_list">
+            <tr>
+                <td>
+                    <br />
+                    <a><b>Комментарии:</b></a>
+                </td>
+            </tr>
+            @{ 
+                foreach (var comment in comments)
+                {
+                    <tr style="background-color:lightcyan">
+                        <td>
+                            <a>@(DateTime.ParseExact(comment.CommentTime, "MM/dd/yyyy HH:mm:ss", CultureInfo.InvariantCulture) + " " + comment.UserName)</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a>@comment.Comment <br /><br /></a>
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+    }
+}
+
+@{
+
+    if (Request.IsAuthenticated && identity.IsAuthenticated)
+    {
+        using (Html.BeginForm("Comment", "Home", new { author = identity.Name, model = Model.Id }, FormMethod.Post))
+        {
+            <hr />
+            <table style="width:800px" align="center" border="0" class = "categories_list">
+                <tr>
+                     <td colspan="2"><b>Ваше мнение о товаре:</b></td>
+                 </tr>
+                 <tr>
+                     <td>
+                           @Html.TextArea("Comment","", 11, 100, new { maxlength = "1024",  @class = "categories_list" }) @*{ style = "width:100%"  })*@
+                     </td>
+                     <td colspan="2" style="text-align:right">
+                           <input type="submit" value="Отправить" />
+                     </td>
+                </tr>
+            </table>
+        }
+    }
+}

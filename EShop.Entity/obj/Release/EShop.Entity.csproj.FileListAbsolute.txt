@@ -1,0 +1,5 @@
+F:\ASP.NET\Projects\ASP.NET.ExamBySergeyMakas\ASP.NET.Exam\EShop.Entity\bin\Release\EShop.Entity.dll
+F:\ASP.NET\Projects\ASP.NET.ExamBySergeyMakas\ASP.NET.Exam\EShop.Entity\bin\Release\EShop.Entity.pdb
+F:\ASP.NET\Projects\ASP.NET.ExamBySergeyMakas\ASP.NET.Exam\EShop.Entity\obj\Release\EShop.Entity.csprojResolveAssemblyReference.cache
+F:\ASP.NET\Projects\ASP.NET.ExamBySergeyMakas\ASP.NET.Exam\EShop.Entity\obj\Release\EShop.Entity.dll
+F:\ASP.NET\Projects\ASP.NET.ExamBySergeyMakas\ASP.NET.Exam\EShop.Entity\obj\Release\EShop.Entity.pdb

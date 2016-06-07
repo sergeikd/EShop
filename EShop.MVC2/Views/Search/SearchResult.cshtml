@@ -1,0 +1,98 @@
+﻿@using EShop.MVC2.Models
+@{
+    ViewBag.Title = "Результат поиска";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model List<SearchResult>
+
+<table border="0" width="800" border-collapse="collapse" color="black" class="categories_list">
+    <tr>
+        <td height="20"> @*это типа breadcrumb*@ 
+            @Html.ActionLink("Главная", "", new { controller = ""}, new { style = "border-bottom: 1px dashed #000080", @class = "categories_list" })        
+        </td>
+    </tr>
+            @{
+                if (Model.Count() > 0)
+                {
+                    var searchQuery = ViewBag.SearchQuery as string;
+                    <tr>
+                        <td colspan="2">
+                            <a>Результат поиска по "@searchQuery </a>
+                            @*@{
+                                var searchWords = ViewBag.SearchWords as string[];
+                                for (int i =0; i < searchWords.Length; i++)
+                                {
+                                    <a>@searchWords[i]</a>
+                                    if (i != searchWords.Length-1)
+                                    {<a>+</a>}
+ 
+                                }
+                            }*@
+                            <hr />
+                        </td>
+                    </tr>
+                    foreach (var m in Model)
+                    {
+                        <tr>
+                            <td style="vertical-align:middle">
+                                @{//весь изврат в этой строке таблицы сделан только для того, чтобы подсветить цветом совпадение в поисковом запросе                                    
+                                    //var description = m.Description;                 
+                                    if (m.Description.Contains(searchQuery))
+                                    {
+                                        string begin = m.Description.Substring(0, m.Description.IndexOf(searchQuery));
+                                        string end = m.Description.Substring(begin.Length + searchQuery.Length, m.Description.Length - begin.Length - searchQuery.Length);
+                                        <a>@begin</a><a style="background-color:lightcyan">@searchQuery</a><a>@end </a>
+                                    }
+                                    else {<a>@m.Description </a>}
+
+                                }
+                                @*@{  //весь изврат в этой строке таблицы сделан только для того, чтобы подсветить совпадение в поисковом запросе
+                                    var description = m.Description.Split(' ').ToArray();
+                                    bool hereIs;
+                                    for (int i = 0; i < description.Length; i++)
+                                    {
+                                        hereIs = false;
+                                        for (int j = 0; j < searchWords.Length; j++)
+                                        {
+                                            if (j < searchWords.Length && description[i].Contains(searchWords[j]))
+                                            {
+                                                string begin = description[i].Substring(0, description[i].IndexOf(searchWords[j]));
+                                                string end = description[i].Substring(begin.Length + searchWords[j].Length, description[i].Length - begin.Length - searchWords[j].Length);
+                                                <a>@begin</a><a style="background-color:lightcyan">@searchWords[j]</a><a>@end </a>
+                                                hereIs = true;
+                                            }
+                                        }
+                                        if (!hereIs)
+                                        {
+                                            <a>@description[i] </a>
+                                        }
+                                    }
+
+                                }*@
+                                <br /><br />
+                                <a>Цена </a>@(m.Price.ToString().Remove(m.Price.ToString().Length - 2, 2))
+                                <br /><br />
+                                @Html.ActionLink("Перейти к товару", "Model", new { controller = "Home", id = m.Id }, new { style= "border-bottom: 1px dashed #000080", @class = "categories_list" })
+                            </td>
+                            <td height="100px">
+                                @Html.LogoUrl(m.ImageId)
+                            </td>
+                        </tr>
+                        <tr >
+                            <td height="10px">
+                                @*просто для отделения строк друг от друга*@
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td>
+                            <a>Поиск не дал результатов</a>
+                        </td>
+                    </tr>
+                }
+            }
+</table>

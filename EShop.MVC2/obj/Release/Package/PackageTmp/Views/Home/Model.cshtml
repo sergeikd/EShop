@@ -1,0 +1,68 @@
+﻿@*@using EShop.Entity*@
+@{
+    ViewBag.Title = "Model";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*данные Model приходят из метода контроллера /Controllers/HomeController.cs > Model(int? id)*@
+@model EShop.Entity.Model
+
+@*вызов частичного представления:
+    метод BreadCrumb(int? id) в контроллере /Controllers/HomeController.cs,
+    генерирование HTML разметки происходит в Views/Home/BreadCrumb.cshtml*@
+@Html.Action("BreadCrumb", new { id = ViewBag.Selected }) 
+
+@*Тут уже выводятся данные о выбранном товаре*@
+
+<table border="0" width="800" border-collapse: collapse;" class="categories_list">
+    <tr>
+        <td colspan="2">
+            @Model.Title
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" style="padding:20px">
+            @Html.ImgUrl(Model.ImageId)
+        </td>
+    </tr>
+    <tr>
+        <td  width="80">
+            <a>Описание:</a>
+        </td>
+        <td >
+            <a>@Model.Description</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a>Цена:</a>
+        </td>
+        <td>
+            <a> @Model.Price.ToString().Remove(Model.Price.ToString().Length - 2, 2)</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a>Гарантия:</a>
+        </td>
+        <td>
+            <a>@Model.Warranty</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a>Наличие:</a>
+        </td>
+        <td>
+            <a>@Model.Availability.AvailabilityType</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a>Доставка:</a>
+        </td>
+        <td>
+            <a>@Model.Delivery.DeliveryType</a>
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,121 @@
+﻿@using System.Text;
+@{
+    ViewBag.Title = "Market";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model IEnumerable<EShop.Entity.Model>
+
+@*вызов частичного представления: 
+метод BreadCrumb(int? id) в контроллере HomeController.cs, 
+генерирование HTML разметки происходит в Views/Home/BreadCrumb.cshtml*@
+
+@Html.Action("BreadCrumb", new { id = ViewBag.Selected }) 
+
+@*вывод моделей выбранной категории*@
+    @if (ViewBag.Selected != null)
+    {
+        //Этот кусок выводит номера страниц, если товар не помещается на одну страницу
+        //----------------------------------------------------------------------------------------------
+        int id = ViewBag.Selected;//номер категории из URL id
+        var id2 = ViewBag.Page;//номер страницы из URL id
+        int countModels = ViewBag.ModelsInCategory;
+        int modelsPerPage = ViewBag.ModelsPerPage;//количество моделей на странице
+        @*<a>@id @id2 @countModels @modelsPerPage</a> <br />*@
+    int pages = 1;
+    if (countModels > modelsPerPage)//поместятся ли все модели на одной странице
+    {
+        pages = ((int)countModels / (int)modelsPerPage) + 1;//количество страниц для выбранной категории
+        for (int i = 1; i <= pages; i++)//рисуем постраничную навигацию
+        {
+            if (id2 != null && i == (int)id2)
+            {<a class="categories_list" href="/Home/Market/@id/@i"><b><u>@i</u></b> </a>}//выделяем жирным c подчеркиванием текущую страницу
+                else {<a class="categories_list" href="/Home/Market/@id/@i">@i </a>}
+            }
+            <br />
+        }
+        //----------------------------------------------------------------------------------------------
+        <table border="0" width="825" style="border-collapse: collapse; margin:0;">
+            <tr>
+                <td>
+                    @foreach (var item in Model)
+                    {
+                    <table border="0"width="205" style="float: left; border-collapse: collapse;">
+                        <tr style="background-color:lightcyan">
+                            <td height="20px" colspan="3">
+                                @*это для поля сверху, т.к. отступ иначе не получается*@
+                            </td>
+                        </tr>
+                        <tr>                      
+                            <td height="100px" colspan="2">
+                                @Html.LogoUrl(item.ImageId)
+                            </td>
+                            <td width="20px">  </td>   @*это для поля справа, т.к. отступ иначе не получается*@                          
+                        </tr>
+                        <tr>
+                            <td class="categories_list" height="60px" colspan="2">
+                                @*вот этот весь изврат ниже нужен для того, чтобы разделять слишком длинные слова (> 25 символов).
+                                это актуально для категрии Ноутбуков, т.к. там модели по 30 символов и они портили всю разметку*@ 
+                                @{
+                                    string title = Html.ShortString(item.Title, 55);
+                                    string[] words = title.Split(' ');
+                                    if (words.Any(w => w.Length > 23)) /*проверка есть ли в массиве строка длиннее 25 символов*/
+                                    {
+                                        StringBuilder titleNew = new StringBuilder();
+                                        foreach (string word in words)
+                                        {
+                                            if (word.Length > 23)
+                                            {
+                                                titleNew.Append(word.Substring(0, 23) + " " + word.Substring(23, word.Length - 23) + " ");
+                                            }
+                                            else
+                                            {
+                                                titleNew.Append(word + " ");
+                                            }
+
+                                        }
+                                        <a>@titleNew</a>
+                                    }
+                                    else /*если длинных строк нет, то выводим как есть*/
+                                    {
+                                        <a> @title </a>
+                                    }
+                                }
+                                
+                            </td>                           
+                        </tr>
+                        <tr>
+                            <td class="categories_list" height="15">
+                                <a>Цена: @item.Price.ToString().Remove(item.Price.ToString().Length - 2, 2)</a>
+                            </td>
+                            @{
+                                if (item.Comments > 0)
+                                {
+                                    <td class="categories_list" width="70" align="right">
+                                        <a>(@item.Comments комм.)</a>
+                                    </td>
+                                }
+                            } 
+
+                            <td></td>                 
+                        </tr>
+                        <tr>
+                            <td>
+                                @*<a class="models_description" href="/Home/Model/@item.Id">Подробнее... </a>*@
+                                @Html.ActionLink("Перейти к товару", "Model", new { controller = "Home", id = item.Id }, new { style = "border-bottom: 1px dashed #000080", @class = "categories_list" })
+                            </td>                            
+                        </tr>
+                    </table>
+                    }
+                </td>
+            </tr>
+        </table>
+    }
+    else
+    {
+        <a class="categories_list">
+            Добро пожаловать на сайт EShop.by <br />
+            Выберите интересующую категорию <br />
+        </a>
+    }
+

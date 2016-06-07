@@ -1,0 +1,21 @@
+﻿@*Частичное представление для отрисовки меню админа.
+Вызывается из Layout.cshtml (td id="rightPanel")
+Оно будет отображаться если залогинен пользователь с ролью "Admins"*@
+@{
+    var identity = this.ViewContext.HttpContext.User.Identity;
+}
+
+<div style="overflow:hidden;" class="categories_list">
+    @if (Request.IsAuthenticated && identity.IsAuthenticated && Roles.GetRolesForUser(identity.Name).Contains("Admins"))
+    {
+        <hr />
+        <div style="background-color:lightcyan">
+            
+            <b>Меню администратора</b><br /><br />
+            @Html.ActionLink("Пользователи", "Admin", "Account", new { controller = "Account" }, new { style = "text-decoration: none; color:black;" }) <br />
+            @Html.ActionLink("Добавить товар", "AddGoods", "Admin", new { controller = "Home" }, new { style = "text-decoration: none; color:black;" }) <br />
+        </div>
+        <hr />
+    }
+
+</div>

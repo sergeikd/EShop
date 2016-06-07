@@ -1,0 +1,108 @@
+﻿
+@{
+    ViewBag.Title = "Регистрация";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*Упражнение 11.2.1 шаг 14*@
+@model EShop.MVC2.Models.UserModel
+
+<a class="categories_list"><b>Форма регистрации нового пользователя</b></a><br />
+
+
+@* начало декларации формы *@
+@using (Html.BeginForm("Users", "Account", FormMethod.Post))
+{
+    <table border="0" width="820" align="center">
+        <tr>
+            <td>
+                <table width="350" bgcolor="#ffffff" border="0"  align="center" class="categories_list">
+                    <tr>
+                        <td width="120px">Full name</td>
+                        <td>
+                            @Html.EditorFor(m => m.FullName) <br /> @Html.ValidationMessageFor(m => m.FullName)
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td width="120px">Login</td>
+                        <td>
+                            @Html.EditorFor(m => m.Login) <br /> @Html.ValidationMessageFor(m => m.Login)
+                        </td>
+                        @*<td><input type="text" name="login" value="@(Model != null ? Model.Login : "")" size="15" /></td>
+                            @if(!ViewData.ModelState.IsValid && ViewData.ModelState["Login"].Errors.Count > 0)
+                            {
+                                <br /><span class="field-validation-error">@ViewData.ModelState["Login"].Errors[0].ErrorMessage</span>
+                            }*@
+                        @*<td>@Html.EditorFor(u => u.UserName, new { style = "width:100%" })</td>*@
+                    </tr>
+                    <tr>
+                        <td>Password</td>
+                        <td>
+                            @Html.EditorFor(m => m.Password) <br /> @Html.ValidationMessageFor(m => m.Password)
+                        </td>
+                        @*<td><input type="password" name="password" value="@(Model != null ? Model.Password : "")" size="15" /></td>*@
+
+                        @*<td>@Html.PasswordFor(u => u.Password, new { style = "width:100%" })</td>*@
+                    </tr>
+                    <tr>
+                        @*<td>Confirm password</td>
+                        <td>
+                            @Html.EditorFor(m => m.Confirm) <br /> @Html.ValidationMessageFor(m => m.Confirm)
+                        </td>*@
+                        @*<td>
+                                <input type="password" name="confirm" value="@(Model != null ? Model.Confirm : "")" size="15" />
+                                <br />@Html.ValidationMessage("Password")
+                            </td>*@
+                        @*<td>@Html.PasswordFor(u => u.ComparePassword, new { style = "width:100%" })</td>*@
+
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td>
+                            @Html.EditorFor(m => m.Email) <br /> @Html.ValidationMessageFor(m => m.Email)
+                        </td>
+                        @*<td>
+                                <input type="text" name="email" value="@(Model != null ? Model.Email : "")" size="15" />
+                                <br />@Html.ValidationMessage("Email")
+                            </td>*@
+                        @*<td>@Html.EditorFor(u => u.Email, new { style = "width:100%" })</td>*@
+
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: right">
+                            <input type="reset" value="Сброс" />
+                            &nbsp;
+                            <input type="submit" value="Регистрация" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="border:solid 1px red">
+                            @*<b>Тут будут сообщения об ошибках при вводе формы</b>*@
+                            <div class="@(ViewData.ModelState.IsValid ? "validation-summary-valid" : "validation-summary-errors")">
+                                @Html.ValidationSummary()
+                                @{ 
+                                    @*if (Model.IsApproved== false)
+                                    {
+                                        <a>тут надо придумать, как на почту выслать ссылку для завершения регистрации</a>
+                                    }*@
+                                }
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+}
+@* конец декларации формы, далее последует список пользователей из репозитория, который мы
+    передадим из контроллера через свойство класса ViewBag.UserList
+*@
+
+@*<fieldset>
+        <legend><b>User list:</b></legend>
+        <div>
+            <b>Тут будет список пользователей, которые зарегистрированы через форму</b>
+        </div>
+    </fieldset>*@
+

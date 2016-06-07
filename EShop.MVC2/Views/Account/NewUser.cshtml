@@ -1,0 +1,28 @@
+﻿@*Сюда попадаем из метода public ActionResult NewUser() контроллера AccountController.cs*@
+
+@{
+    ViewBag.Title = "Подтверждение регистрации";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table border="0" width="800" border-collapse="collapse" color="black" class="categories_list">
+    <tr>
+        <td height="20">
+            @*это типа breadcrumb*@
+            @Html.ActionLink("Главная", "", new { controller = "" }, new { style = "border-bottom: 1px dashed #000080", @class = "categories_list" })
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a>
+                Вам выслано письмо на вашу электронну почту.<br />
+                В нем находится ссылка, по которой нужно пройти для завершения процедуры регистрации.<br />
+                Ссылка действительна в течение одного часа.<br />
+                Если за отведенное время вы не подтвердите регистрацию, то ваша учетная запись будет удалена.
+            </a>
+        </td>
+    </tr>
+
+    
+</table>
+

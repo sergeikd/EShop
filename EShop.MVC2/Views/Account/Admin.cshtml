@@ -1,0 +1,116 @@
+﻿@*Представление для управления списком пользователей.
+Оно отображвается при отработке контроллера AccountController и его методов Admin
+К самим методам Admin идет обращение из частичного представления Views/Shared/AdminPanel.cshtml*@
+
+@{
+    ViewBag.Title = "Пользователи";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model EShop.MVC2.Models.UserModel
+
+<a class="categories_list"><b>Управление пользователями</b></a>
+
+<table border="1" width="100%" style="border-color:lightcyan; border-collapse:collapse; ">
+    <tr>
+        <td style="border-color:lightcyan; border-collapse:collapse;">
+            <fieldset style="color:black; border:5px; margin:0; height:300px; overflow-y:auto;">
+                <div>
+                    @{
+                        var grid = new WebGrid(ViewBag.UserList);
+                        @grid.GetHtml(
+                             tableStyle: "webGrid",
+                             headerStyle: "header",
+                             alternatingRowStyle: "alt",
+                             columns: grid.Columns(
+                                                    grid.Column("UserId", "Id", canSort: true),
+                                                    grid.Column("FullName", "Имя", canSort: true),
+                                                    grid.Column("Login", "Логин", canSort: true),
+                                                    grid.Column("Email", "E-Mail", canSort: true),
+                                                    grid.Column("IsActive", "Активен"),
+                                                    grid.Column("IsApproved", "Подтвержден"),
+                                                    grid.Column("", "", canSort: false,
+                                                                format:
+                                                                    (item) => Html.RouteLink("Изменить", "Default", new { controller = "Account", action = "Admin", id = item.UserId })
+                                                                )
+                                                  )
+                                     );
+                                }
+                </div>
+            </fieldset>
+        </td>
+    </tr>
+</table>
+
+
+@using (Html.BeginForm("Admin", "Account", FormMethod.Post))
+{
+    <table border="0" width="820" align="center">
+        <tr>
+            <td>
+                <table width="350" bgcolor="#ffffff" border="0" align="center" class="categories_list">
+                    <tr>
+                        <td width="120px">Имя</td>
+                        <td>
+                            @Html.EditorFor(m => m.FullName) <br /> @Html.ValidationMessageFor(m => m.FullName)
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td width="120px">Логин</td>
+                        <td>
+                            @Html.EditorFor(m => m.Login) <br /> @Html.ValidationMessageFor(m => m.Login)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Пароль</td>
+                        <td>
+                            @Html.EditorFor(m => m.Password)<a style="color:red"> *</a> <br /> @Html.ValidationMessageFor(m => m.Password) 
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Почта</td>
+                        <td>
+                            @Html.EditorFor(m => m.Email) <br /> @Html.ValidationMessageFor(m => m.Email)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Активен</td>
+                        <td>
+                            @Html.EditorFor(m => m.IsActive) <br />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Подтвержден</td>
+                        <td>
+                            @Html.EditorFor(m => m.IsApproved) <br />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: right">
+                            <input type="reset" value="Сброс" />
+                            &nbsp;
+                            <input type="submit" value="Сохранить" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <a style="color:red">* <i>пароль нельзя прочитать из базы данных, но можно ввести новый и сохранить или ничего не вводить, и тогда он останется без изменений</i></a>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td colspan="2">
+                            
+                            <div class="@(ViewData.ModelState.IsValid ? "validation-summary-valid" : "validation-summary-errors")">
+                                @Html.ValidationSummary()
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+}
+

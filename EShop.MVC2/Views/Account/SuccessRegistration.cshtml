@@ -1,0 +1,25 @@
+﻿@*Сюда попадаем из метода public  public ActionResult CheckKey( int? id, string key) контроллера AccountController.cs если регистрация прошла успешно*@
+@{
+    ViewBag.Title = "Поздравляем";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table border="0" width="800" border-collapse="collapse" color="black" class="categories_list">
+    <tr>
+        <td height="20">
+            @*это типа breadcrumb*@
+            @Html.ActionLink("Главная", "", new { controller = "" }, new { style = "border-bottom: 1px dashed #000080", @class = "categories_list" })
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a>
+                Регистрация успешно завершена!<br />
+                Теперь вы можете войти введя свой логин и пароль.                
+            </a>
+        </td>
+    </tr>
+
+
+</table>
+

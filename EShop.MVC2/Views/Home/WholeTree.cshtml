@@ -1,0 +1,153 @@
+﻿@using EShop.Entity;
+@model List<Layer1>
+
+@*
+    Частичное представление для отрисовки дерева категорий
+    Вызывается со страницы Model.cshtml (см. команду @{Html.RenderAction("WholeTree", "Home");} )
+    Модель готовится в методе public ActionResult WholeTree() контроллера HomeController
+    В нем определяется параметр newCategoryId, который затем отправляется из формы редактирования текущего товара
+    в соответвующий метод ModelEdit(int modelId) контроллера HomeController*@
+
+<ul id="visible">
+    <li><a href="#">Выбор категории</a>
+    <ul id="layer1">
+        @{
+            foreach (var item1 in Model)
+            {
+                <li>
+                    <table>
+                        <tr>
+                            <td width="230px">@item1.CategoryName1 </td>
+                            <td width="20px" style="text-align:right">(@item1.CategoryId1)</td>
+                            @if (item1.Categories1.Count == 0)
+                            {
+                                <td width="20px" style="text-align:right"><input type="radio" name="newCategoryId" value="@item1.CategoryId1" /></td>
+                            }
+                            else
+                            {
+                                <td width="35px"> </td>
+                            }
+
+                        </tr>
+                    </table>
+                    @if (item1.Categories1.Count > 0)
+                    {
+                        <ul id="layer2">
+                            @{
+                                foreach (var item2 in item1.Categories1)
+                                {
+                                    <li>
+                                        <table>
+                                            <tr>
+                                                <td width="200px">@item2.CategoryName2 </td>
+                                                <td width="20px" style="text-align:right">(@item2.CategoryId2)</td>
+                                                @if (item2.Categories2.Count == 0)
+                                                {
+                                                    <td width="20px" style="text-align:right"><input type="radio" name="newCategoryId" value="@item2.CategoryId2" /></td>
+                                                }
+                                                else
+                                                {
+                                                    <td width="35px"> </td>
+                                                }
+
+                                            </tr>
+                                        </table>
+                                        @if (item2.Categories2.Count > 0)
+                                        {
+                                            <ul id="layer3">
+                                                @{
+                                                    foreach (var item3 in item2.Categories2)
+                                                    {
+                                                        <li>
+                                                            <table>
+                                                                <tr>
+                                                                    <td width="150px">@item3.CategoryName3 </td>
+                                                                    <td width="20px" style="text-align:right">(@item3.CategoryId3)</td>
+                                                                    <td width="20px" style="text-align:right"><input type="radio" name="newCategoryId" value="@item3.CategoryId3" /></td>
+                                                                </tr>
+                                                            </table>
+                                                        </li>
+                                                    }
+                                                }
+                                            </ul>
+                                         }
+                                    </li>
+                                 }
+                            }
+                        </ul>
+                     }
+                </li>
+            }
+        }
+    </ul>
+</li>
+</ul>
+<style>
+    #visible  {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 120px;
+        border: 1px solid #777;
+    }
+    #layer1,#layer2,#layer3  {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 230px;
+        border: 1px solid #777;
+    }
+
+    li a{
+        text-decoration: none;
+        color: black;
+    }
+    ul li {
+            position: relative;
+        }
+
+    li ul {
+        position: absolute;
+        top: -1px;
+        left: 230px;
+        display: none;
+    }
+
+    #visible #layer1 {
+        position: absolute;
+        top: -1px;
+        left: 120px;
+        display: none;
+    }
+
+    #visible:hover #layer1 {
+        display: block;
+        background-color:lightcyan
+    }
+
+    #layer1 li #layer2 {
+        position: absolute;
+        top: -1px;
+        left: 230px;
+        display: none;
+    }
+
+    #layer1 li:hover #layer2 {
+        display: block;
+        background-color:lightcyan
+    }
+
+    #layer2 li #layer3 {
+        position: absolute;
+        top: -1px;
+        left: 230px;
+        display: none;
+    }
+
+    #layer2 li:hover #layer3 {
+        display: block;
+        background-color:lightcyan
+    }
+</style>
+
+

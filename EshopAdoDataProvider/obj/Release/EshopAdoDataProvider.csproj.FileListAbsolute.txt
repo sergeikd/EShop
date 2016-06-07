@@ -1,0 +1,7 @@
+F:\ASP.NET\Projects\ASP.NET.ExamBySergeyMakas\ASP.NET.Exam\EshopAdoDataProvider\bin\Release\EshopAdoDataProvider.dll
+F:\ASP.NET\Projects\ASP.NET.ExamBySergeyMakas\ASP.NET.Exam\EshopAdoDataProvider\bin\Release\EshopAdoDataProvider.pdb
+F:\ASP.NET\Projects\ASP.NET.ExamBySergeyMakas\ASP.NET.Exam\EshopAdoDataProvider\bin\Release\EShop.Entity.dll
+F:\ASP.NET\Projects\ASP.NET.ExamBySergeyMakas\ASP.NET.Exam\EshopAdoDataProvider\bin\Release\EShop.Entity.pdb
+F:\ASP.NET\Projects\ASP.NET.ExamBySergeyMakas\ASP.NET.Exam\EshopAdoDataProvider\obj\Release\EshopAdoDataProvider.csprojResolveAssemblyReference.cache
+F:\ASP.NET\Projects\ASP.NET.ExamBySergeyMakas\ASP.NET.Exam\EshopAdoDataProvider\obj\Release\EshopAdoDataProvider.dll
+F:\ASP.NET\Projects\ASP.NET.ExamBySergeyMakas\ASP.NET.Exam\EshopAdoDataProvider\obj\Release\EshopAdoDataProvider.pdb

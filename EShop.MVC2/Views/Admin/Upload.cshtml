@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "Upload";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    int imageId = ViewBag.FileId;
+    int modelId = ViewBag.ModelId;
+}
+
+@*Сюда приходим из метода Upload контроллера AdminController
+После выбора файла с картинкой переходим в метод UploadFile контроллера AdminController для сохранения нового изображения*@
+
+@using (Html.BeginForm("UploadFile", "Admin", FormMethod.Post, new { enctype = "multipart/form-data"}))
+{
+    <div class="categories_list">
+        <input type="hidden" value="@imageId" name="imageId" />
+        <input type="hidden" value="@modelId" name="modelId" />
+        <label for="file" class="control-label">Выберите файл с картинкой</label> <br /><br />
+        <input type="file" name="file" id="file"><br />
+        <br />
+        <input type="submit" value="Загрузить" /><br /><br />
+        <a>В папке ~/Content/Images/ будут изменены файлы с именами: <br />
+        img_
+        @imageId
+        .jpg и <br />
+        ico_
+        @imageId
+        .jpg</a>
+    </div>;
+}

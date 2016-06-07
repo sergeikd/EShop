@@ -1,0 +1,104 @@
+﻿.logo {
+ position: absolute;
+ overflow: hidden;
+ /*margin: 65px 0 0 282px;*/
+ z-index: 100;
+}
+
+#header
+{
+    background-color:lightcyan;
+    color:white;
+    padding:1px;
+}
+
+#contentPanel
+{
+    float: left;
+    margin:5px;
+}
+#leftPanel
+{
+    float: left;
+    margin: 0px;
+    padding: 5px;
+    border: dotted 1px grey;
+    width: 230px;
+    text-decoration: none;
+}
+#rightPanel
+{
+    font-family: Verdana, "Lucida Sans", Arial, Geneva, Helvetica, Helv, "Myriad Web", Syntax, sans-serif;
+    color:black;    
+    font-size: 75%;
+    margin: 1px;
+    padding: 1px;
+    border: dotted 1px grey;
+    width: 160px;
+}
+
+#footer
+{
+    text-align: center;
+    clear: both;
+}
+
+a.categories_list { color: black }
+a.categories_list:active { color: black }
+a.categories_list:link { color: black }
+a.categories_list:visited { color: black }
+
+
+.categories_list
+{
+    font-family: Verdana, "Lucida Sans", Arial, Geneva, Helvetica, Helv, "Myriad Web", Syntax, sans-serif;
+    color:black;    
+    text-decoration:none;
+    font-size: 12px;
+}
+.subcategories_list
+{
+    font-family: Verdana, "Lucida Sans", Arial, Geneva, Helvetica, Helv, "Myriad Web", Syntax, sans-serif;
+    font-size: 66%;
+    color:black;    
+    text-decoration:none;
+}
+.models_description
+{
+    font-family: Verdana, "Lucida Sans", Arial, Geneva, Helvetica, Helv, "Myriad Web", Syntax, sans-serif;
+    color:black;    
+    text-decoration:none;
+    font-size: 11px;
+}
+
+td, div {
+    vertical-align: top;
+    text-align: justify;
+    padding: 1px;
+}
+
+.selected_word
+{
+    background-color: lightcyan;
+    font-family: Verdana, "Lucida Sans", Arial, Geneva, Helvetica, Helv, "Myriad Web", Syntax, sans-serif;
+    color:black;    
+    text-decoration:none;
+    font-size: 12px;
+}
+.webGrid {
+    margin: 4px;
+    border-collapse:collapse;
+    border-color:lightcyan;
+    width: 100%;
+    height: 40px;
+    overflow-y:scroll;
+    border-width: 0px;
+    /*text-align:center;*/
+    font-family: Verdana, "Lucida Sans", Arial, Geneva, Helvetica, Helv, "Myriad Web", Syntax, sans-serif;
+    color:black;    
+    /*align-items: center;
+    justify-content: center; 
+    overflow: auto;*/  
+    font-size: 12px;
+    /*text-decoration:none;*/
+}

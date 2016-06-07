@@ -1,0 +1,24 @@
+﻿@*Сюда попадаем из метода public ActionResult NewUser() контроллера AccountController.cs если при регистрации был указан логин, который уже существует в БД*@
+@{
+    ViewBag.Title = "Ошибка";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<table border="0" width="800" border-collapse="collapse" color="black" class="categories_list">
+    <tr>
+        <td height="20">
+            @*это типа breadcrumb*@
+            @Html.ActionLink("Главная", "", new { controller = "" }, new { style = "border-bottom: 1px dashed #000080", @class = "categories_list" })
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a>
+                К сожалению, указанный вами логин уже занят.<br />
+                Попробуйте подобрать другой.
+            </a>
+        </td>
+    </tr>
+
+
+</table>
+

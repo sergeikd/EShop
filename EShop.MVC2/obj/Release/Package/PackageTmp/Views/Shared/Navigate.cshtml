@@ -1,0 +1,72 @@
+﻿@using EShop.MVC2.Models
+
+@{
+    var Root = ViewData["Root"] as List<CategoryList>; //корневые категории
+    var subCat1 = ViewData["Level1"] as List<CategoryList>; //подкатегории 1 - го уровня
+    var subCat2 = ViewData["Level2"] as List<CategoryList>; // подкатегории 2-го уровня
+    var selected0 = ViewBag.IdLevel0 as int?;//id корневой категории (если надо, то не null)
+    var selected1 = ViewBag.IdLevel1 as int?;//id подкатегории 1-го уровня (если надо, то не null)
+    var selected2 = ViewBag.IdLevel2 as int?;//id подкатегории 2-го уровня (если надо, то не null)   
+}
+
+<ul style="padding: 0; margin: 0;">
+    @foreach (var c in Root)
+    {
+        <li style="text-align: left; list-style-type: none; padding: 0px; margin-left: -5px;" >
+            
+            @if (selected0 == c.Id  && subCat1 != null)
+            {
+                if (selected1 == null)
+                {
+                    <b>@Html.ActionLink(c.Name, "Market", new { controller = "Home", id = c.Id }, new { @class = "categories_list" })</b> @*выделяем жирным шрифтом выбранную корневую категорию*@
+                }
+                else
+                {
+                    @Html.ActionLink(c.Name, "Market", new { controller = "Home", id = c.Id }, new { @class = "categories_list" })@*не выделяем жирным шрифтом выбранную корневую категорию т.к. выбрана подкатегория*@
+                }
+                <ul style="padding: 0; margin: 0;">
+                    @foreach (var sc1 in subCat1)
+                    {
+                        <li style="text-align: left; list-style-type: none; padding: 0; margin-left: 10px;">
+                            @if (selected1 != null && sc1.Id == selected1)
+                            {
+                                if (selected2 == null)
+                                {
+                                    <b>@Html.ActionLink(sc1.Name, "Market", new { controller = "Home", id = sc1.Id }, new { @class = "categories_list" })</b> @*выделяем жирным шрифтом  выбранную подкатегорию 1-го уровня*@
+                                }
+                                else
+                                {
+                                    @Html.ActionLink(sc1.Name, "Market", new { controller = "Home", id = sc1.Id }, new { @class = "categories_list" })  @*не выделяем жирным шрифтом выбранную подкатегорию, т.к. выбрана подкатегория 2-го уровня*@
+                                }
+
+                                <ul style="padding: 0; margin: 0;">
+                                    @foreach (var sc2 in subCat2)
+                                    {
+                                        <li style="text-align: left; list-style-type: none; padding: 0; margin-left: 15px;">
+                                            @if (selected2 != null && sc2.Id == selected2)
+                                            {
+                                                <b>@Html.ActionLink(sc2.Name, "Market", new { controller = "Home", id = sc2.Id }, new { @class = "categories_list" })</b>@*выделяем жирным шрифтом выбранную подкатегорию 2-го уровня*@
+                                            }
+                                            else
+                                            {
+                                                @Html.ActionLink(sc2.Name, "Market", new { controller = "Home", id = sc2.Id }, new { @class = "categories_list" })
+                                            }                                                                                
+                                        </li>
+                                    }
+                                </ul>
+                            }
+                            else
+                            {
+                                @Html.ActionLink(sc1.Name, "Market", new { controller = "Home", id = sc1.Id }, new { @class = "categories_list" })
+                            }                           
+                        </li>
+                    }
+                </ul>
+            }
+            else
+            {
+                @Html.ActionLink(c.Name, "Market", new { controller = "Home", id = c.Id }, new { @class = "categories_list" })
+            }
+        </li>
+    }
+</ul>

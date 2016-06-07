@@ -1,0 +1,96 @@
+﻿
+@{
+    ViewBag.Title = "Добавить товар";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model EShop.Entity.Model
+
+@{var error = ViewBag.Error as List<string>;}
+@{using (Html.BeginForm("AddModel", "Admin", new { enctype = "multipart/form-data" }, FormMethod.Post))
+    {
+        //Model.AvailabilityId = 1;
+        //Model.DeliveryId = 1;
+<table border="0" width="800" border-collapse collapse;" class="categories_list">
+    <tr>
+        <td colspan="2" style="padding:20px">
+            <a>Внимание!<br />
+            Сначала введите все данные о товаре<br />
+            Затем загрузите изображение товара в меню редактирования товара, который будет сохранен в базе данных</a><br /><br />
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">Назначьте категорию товара:</td>
+    </tr>
+    <tr>
+        <td colspan="2" style="text-align:center">@{Html.RenderAction("WholeTree", "Home");}</td>
+    </tr>
+
+    <tr>
+        <td width="80">
+            <a>Краткое описание:</a>
+        </td>
+        <td>
+            <a>@Html.TextArea("Title", "", 2, 100, new { maxlength = "512", @class = "categories_list", width = "100%" })</a>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <a>Описание:</a>
+        </td>
+        <td>
+            <a>@Html.TextArea("Description", "", 2, 100, new { maxlength = "2048", @class = "categories_list", width = "100%" })</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a>Цена:</a>
+        </td>
+        <td>
+            <a>@Html.TextArea("Price", "", 1, 10, new { maxlength = "10", @class = "categories_list", width = "100%" })</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a>Гарантия:</a>
+        </td>
+        <td>
+            <a>@Html.TextArea("Warranty", "", 1, 2, new { maxlength = "2", @class = "categories_list", width = "100%" })</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a>Наличие:</a>
+        </td>
+        <td>
+            <a>@Html.DropDownListFor(model => model.AvailabilityId, (IEnumerable<SelectListItem>)ViewBag.AvailabilityListModel, new { @class = "categories_list" })</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a>Доставка:</a>
+        </td>
+        <td>
+            <a>@Html.DropDownListFor(model => model.DeliveryId, (IEnumerable<SelectListItem>)ViewBag.DeliveryListModel, new { @class = "categories_list" })</a>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" style="text-align:right; ">
+            <input type="submit" value="Cохранить" />
+        </td>
+    </tr>
+    @if(error != null && error.Count >0)
+    {
+        foreach(var item in error)
+        {
+            <tr>
+                <td colspan="2" style="color:red">
+                    @item
+                </td>
+            </tr>
+        }
+    }
+</table>
+}
+
+}

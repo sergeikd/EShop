@@ -1,0 +1,35 @@
+﻿@*Здесь отрисовывается таблица с курсами валют.
+Данные Model приходят из контроллера /Controllers/CurrencyController.cs
+А к этому контроллеру идет обращение из мастер-страницы Views/Shared/_Layout.cshtml
+смотри @{ Html.RenderAction("GetExRates", "Currency"); }*@
+
+@model IEnumerable<EShop.MVC2.Models.ExRateItem>
+
+<table>
+    <thead style="background-color:snow; font-weight:bold;">
+    <tr>
+        <td colspan="2">Курсы валют</td>
+    </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            DateTime? dt = ViewBag.UpdateDate as DateTime?;
+            var dt2 = (dt == null) ? "undefined" : dt.Value.ToLocalTime().ToString();
+            foreach (var rate in Model)
+            {
+                <tr>
+                    <td>@rate.Exchange</td>
+                    <td>@string.Format("{0:N2}", rate.Rate)</td>
+                </tr>
+            }
+            <tr>
+                <td colspan="2" class="small title">
+                    Update: @dt2
+                </td>
+            </tr>
+        }
+    </tbody>
+    
+</table>
+

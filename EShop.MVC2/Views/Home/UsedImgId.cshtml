@@ -1,0 +1,75 @@
+﻿@model List<int>
+
+@*
+    Частичное представление для вывода используемых в БД ImageId для товаров
+    Вызывается со страницы Model.cshtml (см. команду @{Html.RenderAction("UsedImgId", "Home");} )
+    Модель готовится в методе public ActionResult UsedImgId() контроллера HomeController
+    Внизу находятся стили, обеспечивающие появление списка при наведении мыши
+*@
+
+<ul id="visible2">
+    <li><a href="#">Используемые Id</a>
+        <ul id="listId">
+            <li>
+                <table>
+                    <tr>
+                        <td width="1248px">
+                            @{
+                                foreach (var item in Model)
+                                {
+                                    <small>@item.ToString() </small>
+                                }
+                            }
+                        </td>
+                    </tr>
+                </table>
+            </li>
+        </ul>
+    </li>
+</ul>
+<style>
+    #visible2  {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 120px;
+        border: 1px solid #777;
+    }
+    #listId  {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 1248px;
+        border: 1px solid #777;
+        
+    }
+    li a{
+            text-decoration: none;
+            color: black;
+        }
+
+    ul li {
+            position: relative;
+        }
+
+    li ul {
+        position: absolute;
+        top: -1px;
+        left: 230px;
+        display: none;
+    }
+
+    #visible2 #listId {
+        position: absolute;
+        top: 15px;
+        left: -250px;
+        display: none;
+    }
+
+    #visible2:hover #listId {
+        display: block;
+        background-color:lightcyan
+    }
+</style>
+
+

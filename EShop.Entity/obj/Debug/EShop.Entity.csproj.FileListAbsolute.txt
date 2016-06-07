@@ -1,0 +1,15 @@
+F:\ASP.NET\Projects\ASP.NET.Exam\EShop.Entity\bin\Debug\EShop.Entity.dll
+F:\ASP.NET\Projects\ASP.NET.Exam\EShop.Entity\bin\Debug\EShop.Entity.pdb
+F:\ASP.NET\Projects\ASP.NET.Exam\EShop.Entity\obj\Debug\EShop.Entity.dll
+F:\ASP.NET\Projects\ASP.NET.Exam\EShop.Entity\obj\Debug\EShop.Entity.pdb
+F:\ASP.NET\Projects\ASP.NET.Exam\EShop.Entity\obj\Debug\EShop.Entity.csprojResolveAssemblyReference.cache
+G:\ASP.NET.Exam\EShop.Entity\bin\Debug\EShop.Entity.dll
+G:\ASP.NET.Exam\EShop.Entity\bin\Debug\EShop.Entity.pdb
+G:\ASP.NET.Exam\EShop.Entity\obj\Debug\EShop.Entity.csprojResolveAssemblyReference.cache
+G:\ASP.NET.Exam\EShop.Entity\obj\Debug\EShop.Entity.dll
+G:\ASP.NET.Exam\EShop.Entity\obj\Debug\EShop.Entity.pdb
+F:\ASP.NET\Projects\ASP.NET.ExamBySergeyMakas\ASP.NET.Exam\EShop.Entity\bin\Debug\EShop.Entity.dll
+F:\ASP.NET\Projects\ASP.NET.ExamBySergeyMakas\ASP.NET.Exam\EShop.Entity\bin\Debug\EShop.Entity.pdb
+F:\ASP.NET\Projects\ASP.NET.ExamBySergeyMakas\ASP.NET.Exam\EShop.Entity\obj\Debug\EShop.Entity.csprojResolveAssemblyReference.cache
+F:\ASP.NET\Projects\ASP.NET.ExamBySergeyMakas\ASP.NET.Exam\EShop.Entity\obj\Debug\EShop.Entity.dll
+F:\ASP.NET\Projects\ASP.NET.ExamBySergeyMakas\ASP.NET.Exam\EShop.Entity\obj\Debug\EShop.Entity.pdb

@@ -1,0 +1,7 @@
+F:\ASP.NET\Projects\ASP.NET.ExamBySergeyMakas\ASP.NET.Exam\EShop.ServiceLayer\bin\Release\EShop.ServiceLayer.dll
+F:\ASP.NET\Projects\ASP.NET.ExamBySergeyMakas\ASP.NET.Exam\EShop.ServiceLayer\bin\Release\EShop.ServiceLayer.pdb
+F:\ASP.NET\Projects\ASP.NET.ExamBySergeyMakas\ASP.NET.Exam\EShop.ServiceLayer\bin\Release\EShop.Entity.dll
+F:\ASP.NET\Projects\ASP.NET.ExamBySergeyMakas\ASP.NET.Exam\EShop.ServiceLayer\bin\Release\EShop.Entity.pdb
+F:\ASP.NET\Projects\ASP.NET.ExamBySergeyMakas\ASP.NET.Exam\EShop.ServiceLayer\obj\Release\EShop.ServiceLayer.csprojResolveAssemblyReference.cache
+F:\ASP.NET\Projects\ASP.NET.ExamBySergeyMakas\ASP.NET.Exam\EShop.ServiceLayer\obj\Release\EShop.ServiceLayer.dll
+F:\ASP.NET\Projects\ASP.NET.ExamBySergeyMakas\ASP.NET.Exam\EShop.ServiceLayer\obj\Release\EShop.ServiceLayer.pdb

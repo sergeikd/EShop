@@ -1,0 +1,44 @@
+﻿@*Меню ввода поискового запроса.
+Данные для формирования выпадающих списков приходят из SearchController -> public ActionResult Index()*@
+
+@using (Html.BeginForm("SearchRequest", "Search", FormMethod.Get))
+{
+                <table width="90" border="0">
+                    <tr>
+                        <td><b>Поиск</b></td>
+                    </tr>
+                    <tr>
+                        <td>@Html.TextBox("search_query", "", new { maxlength = "63", style = "width: 145px" })  </td>@*"width: 144px"*@
+
+                        @*<td>@Html.EditorFor(u => u.UserName, new { style = "width:100%" })</td>*@
+                    </tr>
+                    <tr>
+                        <td>
+                            <a>Искать в категориях</a> <br />
+                            @Html.DropDownList("category", ViewBag.CategoriesList as SelectList,new { @*size = "25",*@ style = "width: 100%"})@*"width: 148px"*@
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <a>Учитывать наличие</a> <br />
+                            @Html.DropDownList("availability", ViewBag.AvailabilityList as SelectList, new { @*size = "25",*@ style = "width: 100%" })@*"width: 148px"*@
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a>Цена <br />от </a>@Html.TextBox("from", "", new { maxlength = "6", style = "width: 40px" }) 
+                            <a> до </a>@Html.TextBox("to", "", new { maxlength = "6", style = "width: 40px" })                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: left">
+
+                            <input type="submit" value="Искать" />
+                        </td>
+                    </tr>
+                </table>
+
+}
+
+

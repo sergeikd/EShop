@@ -1,0 +1,32 @@
+﻿@using EShop.MVC2.Models
+
+@*частичное представление для геренирования BreadCrumb (панели навигации)
+    данные сюда передает метод BreadCrumb из контроллера HomeController.cs
+    это представление запрашивается в Market.chtml для отрисовки 
+    (cм. Html.Action("BreadCrumb", new { id = ViewBag.Selected }) )*@
+
+@model List<BreadCrumb>
+
+@if (Model != null)
+{
+    <table>
+        <tr>
+            <td>
+                @{
+                    int breadCrumbTrailCounter = 1;
+                    foreach (var item in Model)
+                    {
+                        @Html.ActionLink(item.Text, "Market", new { controller = "Home", id = item.Link }, new { style = "border-bottom: 1px dashed #000080", @class = "categories_list" })
+                        if (Model.Count > breadCrumbTrailCounter) /*это чтоб последнюю стрелочку не рисовать*/
+                        {
+                            <a> &rarr; </a>
+                            breadCrumbTrailCounter++;
+                        }
+                    }
+                }
+            </td>
+        </tr>
+    </table>
+
+    <br />
+}
